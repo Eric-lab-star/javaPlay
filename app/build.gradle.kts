@@ -6,9 +6,13 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    application
+    java
+    id("org.springframework.boot") version "3.3.1"
+    id("io.spring.dependency-management") version "1.1.5"
 }
+
+group = "github.com"
+version = "0.0.1-SNAPSHOT"
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -16,6 +20,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
     // Use JUnit Jupiter for testing.
     testImplementation(libs.junit.jupiter)
 
@@ -32,16 +37,6 @@ java {
     }
 }
 
-application {
+springBoot {
     mainClass.set("github.com.EricLabStar.App")
-}
-
-tasks.named<Test>("test") {
-    useJUnitPlatform()
-}
-
-tasks.register<Copy>("copyTask") {
-    from("source")
-    into("target")
-    include("*.war")
 }
